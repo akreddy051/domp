@@ -1,22 +1,23 @@
 package com.example.payment_service.controller;
 
-import com.example.payment_service.dto.OrderResponse;
 import com.example.payment_service.service.PaymentServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/payments/order")
+@RequestMapping("/api/payments/order")
 public class PaymentController {
 
-    @Autowired
-    PaymentServiceInterface paymentServiceInterface;
+    private final PaymentServiceInterface paymentService;
+
+    public PaymentController(PaymentServiceInterface paymentService) {
+        this.paymentService = paymentService;
+    }
 
     @GetMapping("/{orderId}")
-    public OrderResponse retrieveOrderDetails(@PathVariable("orderId") int orderId){
-        return paymentServiceInterface.getOrderDetailsService(orderId);
+    public ResponseEntity<?> retrieveOrderDetails(
+            @PathVariable int orderId) {
+
+        return paymentService.getOrderDetailsService(orderId);
     }
 }

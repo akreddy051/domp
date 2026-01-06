@@ -1,7 +1,7 @@
 package com.example.payment_service.service;
 
-import com.example.payment_service.dto.OrderResponse;
+import org.springframework.http.ResponseEntity;
 
 public interface PaymentServiceInterface {
-    OrderResponse getOrderDetailsService(int orderId);
+    ResponseEntity<?> getOrderDetailsService(int orderId);
 }
