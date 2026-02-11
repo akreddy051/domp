@@ -4,6 +4,7 @@ import com.example.order_service.dto.OrderResponse;
 import com.example.order_service.dto.ResponseMessage;
 import com.example.order_service.entity.Order;
 import com.example.order_service.service.OrderServiceInterface;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,10 @@ public class OrderController {
     @Autowired
     OrderServiceInterface orderService;
 
+    @Operation(
+            summary = "Create a new order",
+            description = "Creates a new order with item details and price"
+    )
     @PostMapping
     public ResponseMessage createOrder(@RequestBody Order order){
         return orderService.createOrderService(order);
