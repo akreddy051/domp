@@ -26,15 +26,17 @@ public class OrderController {
             description = "Creates a new order with item details and price"
     )
     @PostMapping
-    public ResponseMessage createOrder(@RequestBody Order order){
+    public ResponseMessage createOrder(@RequestBody Order order) {
         return orderService.createOrderService(order);
     }
+
     @GetMapping
-    public List<Order> retrieveAllOrders(){
+    public List<Order> retrieveAllOrders() {
         return orderService.getAllOrdersService();
     }
+
     @GetMapping("/{orderId}")
-    public OrderResponse retrieveOrder(@PathVariable("orderId") int id){
+    public OrderResponse retrieveOrder(@PathVariable("orderId") int id) {
         Order order = orderService.getOrdersService(id);
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setId(order.getOrderId());
@@ -43,12 +45,14 @@ public class OrderController {
         orderResponse.setInstance(instanceId);
         return orderResponse;
     }
+
     @PutMapping("/{orderId}")
-    public ResponseMessage updateOrder(@PathVariable("orderId") int id,@RequestBody Order order){
-        return orderService.updateOrderService(id,order);
+    public ResponseMessage updateOrder(@PathVariable("orderId") int id, @RequestBody Order order) {
+        return orderService.updateOrderService(id, order);
     }
+
     @DeleteMapping("/{orderId}")
-    public ResponseMessage deleteOrder(@PathVariable("orderId") int id){
+    public ResponseMessage deleteOrder(@PathVariable("orderId") int id) {
         return orderService.deleteOrderService(id);
     }
 }
